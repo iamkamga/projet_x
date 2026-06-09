@@ -1,263 +1,159 @@
-# projet_x
-Conception architecturale d'une application e-commerce
+[![Déployer avec Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsaleor%2Fnextjs-commerce&env=COMPANY_NAME,TWITTER_CREATOR,TWITTER_SITE,SITE_NAME,SALEOR_INSTANCE_URL&project-name=saleor-nextjs-commerce&repository-name=saleor-nextjs-commerce&demo-title=Saleor%20Next.js%20Commerce&demo-description=Saleor%20%2B%20Next.js%2013%20%2B%20App%20Router-ready%20e-commerce%20template&demo-url=https%3A%2F%2Fsaleor-commerce.vercel.app%2F&demo-image=https%3A%2F%2Fsaleor-commerce.vercel.app%2Fscreenshot.png)
 
-1. Introduction
+> [!IMPORTANT]
+> Pour un usage en production, nous recommandons d'utiliser notre [Next.js Starter](https://github.com/saleor/storefront) officiel. Ce dépôt peut être utile pour comparer différentes plateformes e-commerce qui utilisent également [Next.js Commerce](https://nextjs.org/commerce).
 
-Il s'agit ici de concevoir l'architecture d'une application e-commerce permettant aux utilisateurs de consulter des produits, les ajouter à un panier et effectuer des achats en ligne de manière sécurisée.
+---
 
-L'application devra proposer une interface moderne, intuitive et responsive, créer les diagrammes d'architecture, définir la structure des dossiers et fichiers, et rédiger un document de conception permettant la gestion complète d’une boutique en ligne (clients, produits, commandes, paiements).
+# 🛒 Next.js Commerce
 
-2. Objectifs
+Un template e-commerce **Next.js 13** prêt pour l'App Router, avec les fonctionnalités suivantes :
 
-Les principaux objectifs du projet sont :
+- ⚡ **Next.js App Router**
+- 🔍 **Optimisé pour le SEO** grâce aux Métadonnées Next.js
+- 🧩 **React Server Components (RSC)** et Suspense
+- 🔄 **Server Actions** pour les mutations
+- 🌐 **Edge Runtime**
+- 🗄️ **Nouveaux paradigmes de récupération et de mise en cache**
+- 🖼️ **Images OG dynamiques**
+- 🎨 **Style avec Tailwind CSS**
+- 💳 **Paiement et checkout avec Saleor**
+- 🌙 **Mode clair/sombre automatique** basé sur les paramètres système
 
-Appliquer les principes d'architecture full stack
-Mise en place d'une architecture 3 tiers
-Définir une API REST sécurisée
-Séparer clairement les responsabilités (frontend / backend / base de données)
-Produire une documentation technique détaillée
-Définir les flux de données
-Gérer une interface responsive (mobile / tablette / desktop)
-Gérer les transactions et paiements sécurisés
-Mettre en place une authentification sécurisée
-Assurer la gestion des commandes et du stock
+---
 
-3. Besoins Fonctionnels
+<h3 id="v1-note"></h3>
 
-3.1 Authentification
-Création d’un compte client
-Connexion sécurisée
-Déconnexion sécurisée
-Gestion des rôles (Admin / Client)
-Protection des routes sensibles
+> 📌 **Note :** Vous cherchez Next.js Commerce v1 ? Consultez le [code](https://github.com/vercel/commerce/tree/v1), la [démo](https://commerce-v1.vercel.store) et les [notes de version](https://github.com/vercel/commerce/releases/tag/v1).
 
-3.2 Gestion des Produits (Admin)
-Ajouter un produit (nom, description, prix, stock, image, catégorie)
-Modifier un produit
-Supprimer un produit
-Activer / Désactiver un produit
-Gérer les catégories
+---
 
-3.3 Catalogue Produits (Client)
-Afficher la liste des produits
-Filtrer par catégorie
-Rechercher par mot-clé
-Voir le détail d’un produit
-Affichage des avis clients
+## 🤝 Fournisseurs
 
-3.4 Panier
-Ajouter un produit au panier
-Modifier la quantité
-Supprimer un produit du panier
-Calcul automatique du total
-Sauvegarde du panier pour utilisateur connecté
+Vercel est heureux de collaborer avec n'importe quel fournisseur e-commerce pour les aider à proposer un template similaire. Les fournisseurs alternatifs peuvent forker ce dépôt et remplacer les fichiers `lib/…` par leur propre implémentation, en laissant le reste du template inchangé.
 
-3.5 Commandes
-Valider une commande
-Générer un récapitulatif
-Historique des commandes
-Suivi du statut (En attente, Payée, Expédiée, Livrée, Annulée)
+---
 
-3.6 Paiement
-Intégration d’un système de paiement sécurisé (Stripe ou PayPal)
-Confirmation automatique de paiement
-Génération de facture
+## 🚀 Démarrage local
 
-4. Besoins Non-Fonctionnels
+Vous devrez utiliser les variables d'environnement [définies dans `.env.example`](.env.example) pour exécuter Next.js Commerce. Il est recommandé d'utiliser les [Variables d'environnement Vercel](https://vercel.com/docs/concepts/projects/environment-variables), mais un simple fichier `.env` suffit.
 
-L’application devra garantir :
+> [!WARNING]
+> Ne commitez jamais votre fichier `.env` — il exposerait des secrets permettant à d'autres personnes de contrôler votre boutique Saleor.
 
-Protection contre les injections SQL
-Sécurisation des paiements (HTTPS, chiffrement)
-Validation stricte des données
-Protection des informations sensibles
-Haute disponibilité
-Temps de réponse rapide
-Optimisation SEO
-Bonne organisation du code
-Scalabilité du système
+**Étapes de configuration :**
 
-5. Contraintes Techniques
-Architecture 3 tiers obligatoire
-Modèle client/serveur
-Communication sécurisée HTTPS
-Séparation claire frontend / backend
-Base de données relationnelle
-Gestion des sessions et tokens
-Versioning Git
-Déploiement sur serveur cloud
-Compatibilité multi-navigateurs
+1. Installer Vercel CLI : `npm i -g vercel`
+2. Lier l'instance locale avec vos comptes Vercel et GitHub (crée le dossier `.vercel`) : `vercel link`
+3. Télécharger vos variables d'environnement : `vercel env pull`
 
-6. Architecture du système
+```bash
+pnpm install
+pnpm dev
+```
 
-Les couches de l’architecture sont :
+Votre application devrait maintenant être accessible sur [localhost:3000](http://localhost:3000/).
 
-Front-end : React (pages : Home, Login, Register, Products, Cart, Checkout, Dashboard Admin), gestion d’état global, appels API
-Back-end : Node.js (contrôleurs, services métier, middleware sécurité, gestion erreurs, routes REST)
-Base de données : Base relationnelle (MySQL ou PostgreSQL)
-Schéma logique
+---
 
-Utilisateur
-  |
-  v
-Front-end (React.js)
-  | API REST
-  v
-Back-end (Node.js)
-  |
-  v
-Base de données (MySQL)
+## ⚙️ Configuration de votre boutique Saleor
 
-6.1 Choix des technologies
+Next.js Commerce nécessite un [compte Saleor](https://saleor.io/).
 
-| Couche           | Technologie          |
-| ---------------- | -------------------- |
-| Frontend         | React.js             |
-| Backend          | Node.js (Express.js) |
-| Base de données  | MySQL                |
-| Authentification | JWT                  |
-| Paiement         | Stripe               |
-| Communication    | API REST             |
-| Versioning       | Git                  |
+### 🔗 Ajouter l'URL Saleor en variable d'environnement
 
+Créez une variable d'environnement `SALEOR_INSTANCE_URL` et utilisez l'URL de votre API GraphQL Saleor comme valeur (ex. : `https://yourinstance.saleor.cloud/graphql/`).
 
-6.2 Responsabilités de chaque composant
-Frontend
-Affichage des produits
-Gestion du panier
-Gestion des interactions utilisateur
-Validation côté client
-Communication API
-Gestion du responsive design
-Backend
-Logique métier (commandes, paiements, stock)
-Authentification et autorisation
-Validation des données
-Gestion des paiements
-Exposition API REST
-Logging et gestion des erreurs
-Base de données
-Stockage utilisateurs
-Stockage produits
-Stockage commandes
-Gestion des transactions
-Intégrité référentielle
-Indexation des requêtes
+### 🔌 Accéder à l'API Storefront Saleor
 
-7. Modélisation des données
+Next.js Commerce utilise [l'API Storefront de Saleor](https://docs.saleor.io/docs/3.x/api-storefront/api-reference) pour créer des expériences client uniques. L'API offre une gamme complète d'options e-commerce permettant de gérer les produits, collections, menus, pages, panier, checkout, et bien plus.
 
-Table : users
+### 🔁 Configurer les webhooks pour la régénération statique incrémentale à la demande (ISR)
 
-| Champ         | Type    | Description        |
-| ------------- | ------- | ------------------ |
-| id            | INT     | Identifiant unique |
-| email         | VARCHAR | Email unique       |
-| password_hash | VARCHAR | Mot de passe haché |
-| role          | ENUM    | admin / client     |
-| created_at    | DATE    | Date création      |
+En utilisant [les webhooks Saleor](https://docs.saleor.io/docs/3.x/developer/extending/webhooks/overview) et en écoutant certains [événements webhook Saleor](https://docs.saleor.io/docs/3.x/api-reference/webhooks/enums/webhook-event-type-async-enum), on peut utiliser la [revalidation à la demande de Next.js](https://nextjs.org/docs/app/building-your-application/data-fetching/revalidating#using-on-demand-revalidation) pour maintenir les données indéfiniment en cache jusqu'à ce que certains événements se produisent dans la boutique Saleor.
 
-Table : products
+Next.js est préconfiguré pour écouter les événements webhook Saleor suivants et revalider automatiquement les données :
 
-| Champ       | Type     | Description         |
-| ----------- | -------- | ------------------- |
-| id          | INT      | Identifiant         |
-| name        | VARCHAR  | Nom du produit      |
-| description | TEXT     | Description         |
-| price       | DECIMAL  | Prix                |
-| stock       | INT      | Quantité disponible |
-| image_url   | VARCHAR  | Image               |
-| category_id | INT (FK) | Référence catégorie |
-| created_at  | DATE     | Date création       |
+- `CategoryCreated`
+- `CategoryDeleted`
+- `CategoryUpdated`
+- `CollectionUpdated`
+- `CollectionDeleted`
+- `CollectionCreated`
+- `ProductCreated`
+- `ProductDeleted`
+- `ProductUpdated`
+- `ProductVariantCreated`
+- `ProductVariantDeleted`
+- `ProductVariantUpdated`
 
-Table : orders
+<details>
+<summary>📋 Voir le guide de configuration détaillé</summary>
 
-| Champ        | Type     | Description                                      |
-| ------------ | -------- | ------------------------------------------------ |
-| id           | INT      | Identifiant                                      |
-| user_id      | INT (FK) | Client                                           |
-| total_amount | DECIMAL  | Montant total                                    |
-| status       | ENUM     | pending / paid / shipped / delivered / cancelled |
-| created_at   | DATE     | Date commande                                    |
+#### ⚙️ Configurer les webhooks Saleor
 
-| Champ        | Type     | Description                                      |
-| ------------ | -------- | ------------------------------------------------ |
-| id           | INT      | Identifiant                                      |
-| user_id      | INT (FK) | Client                                           |
-| total_amount | DECIMAL  | Montant total                                    |
-| status       | ENUM     | pending / paid / shipped / delivered / cancelled |
-| created_at   | DATE     | Date commande                                    |
+1. Accédez à **Configuration → Webhooks** : `https://[votre-sous-domaine].saleor.cloud/dashboard/custom-apps/add`
+2. Nommez votre application `Next.js Commerce`, ajoutez les permissions `MANAGE_ORDERS`, `MANAGE_DISCOUNTS` et `MANAGE_PRODUCTS`, puis sauvegardez.
+3. Cliquez sur le bouton **"Créer un webhook"**.
+4. Nommez votre webhook et ajoutez votre URL Next.js Commerce avec `/api/revalidate`.
+5. **Note :** Vous n'avez pas besoin d'ajouter de "secrets" à l'URL. Saleor utilise le chiffrement par clé publique pour vérifier que le webhook provient bien de votre boutique.
+6. Copiez-collez [la requête d'abonnement](https://github.com/saleor/nextjs-commerce/blob/main/lib/saleor/webhookSubscription.graphql) en bas de la page et sauvegardez.
 
-Table : order_items
+#### 🧪 Tester les webhooks en développement local
 
-| Champ      | Type     | Description          |
-| ---------- | -------- | -------------------- |
-| id         | INT      | Identifiant          |
-| order_id   | INT (FK) | Référence commande   |
-| product_id | INT (FK) | Produit              |
-| quantity   | INT      | Quantité             |
-| price      | DECIMAL  | Prix au moment achat |
+La méthode la plus simple pour tester les webhooks en développement local est d'utiliser [ngrok](https://ngrok.com/).
 
-8. Endpoints de l’API
+1. [Installez et configurez ngrok](https://ngrok.com/download) (vous devrez créer un compte).
+2. Lancez votre application localement : `npm run dev`
+3. Dans un terminal séparé, exécutez : `ngrok http 3000`
+4. Utilisez l'URL générée par ngrok et mettez à jour vos URLs de webhook dans Saleor.
 
-| CRUD   | Méthode        | URL                     | Action |
-| ------ | -------------- | ----------------------- | ------ |
-| POST   | /auth/register | Créer compte            |        |
-| POST   | /auth/login    | Connexion               |        |
-| GET    | /products      | Liste produits          |        |
-| GET    | /products/:id  | Détail produit          |        |
-| POST   | /products      | Ajouter produit (admin) |        |
-| PUT    | /products/:id  | Modifier produit        |        |
-| DELETE | /products/:id  | Supprimer produit       |        |
-| POST   | /cart          | Ajouter au panier       |        |
-| GET    | /cart          | Voir panier             |        |
-| POST   | /orders        | Créer commande          |        |
-| GET    | /orders        | Historique commandes    |        |
-| POST   | /payment       | Effectuer paiement      |        |
+</details>
 
-9. Flux des données
+---
 
-L’utilisateur consulte les produits
-  |
-  v
-Ajoute au panier
-  |
-  v
-Front-end envoie requête API
-  |
-  v
-Backend traite logique métier
-  |
-  v
-Base de données mise à jour
-  |
-  v
-Réponse JSON retournée
-  |
-  v
-Interface mise à jour
+## 🗂️ Utiliser Saleor comme CMS
 
-10. Structure du projet
+Next.js Commerce est entièrement propulsé par Saleor dans une approche véritablement headless et data-driven.
 
-├── README.md
-├── ecommerce-app/
-│   ├── backend/
-│   │   ├── config/
-│   │   ├── controllers/
-│   │   ├── middleware/
-│   │   ├── models/
-│   │   ├── services/
-│   │   └── routes/
-│   └── frontend/
-│       └── src/
-│           ├── components/
-│           ├── pages/
-│           ├── context/
-│           └── services/
+### 📦 Produits
 
+[`https://yourinstance.saleor.cloud/dashboard/products/`](https://yourinstance.saleor.cloud/dashboard/products/)
 
-11. Conclusion
+- Seuls les produits `Actifs` sont affichés. Les produits en `Brouillon` ne seront pas visibles tant qu'ils ne sont pas marqués comme `Actifs`.
+- Les options de produit et leurs combinaisons sont gérées par les options et variantes Saleor. Lors de la sélection d'options sur la page produit, les autres options et combinaisons de variantes sont validées et vérifiées visuellement pour leur disponibilité, comme le fait Amazon.
+- Les produits actifs mais **en rupture de stock** sont toujours affichés sur le site, mais le bouton d'ajout au panier est désactivé.
 
-Ce projet permettra de concevoir, développer et maintenir une application e-commerce complète, sécurisée et performante, basée sur une architecture 3 tiers cohérente.
-Ce cahier des charges servira de référence tout au long du développement afin de garantir que l’application réponde aux exigences fonctionnelles, techniques et sécuritaires d’un système de vente en ligne moderne.
+### 🗃️ Collections
 
+[`https://yourinstance.saleor.cloud/dashboard/collections/`](https://yourinstance.saleor.cloud/dashboard/collections/)
 
+Créez les collections que vous souhaitez et configurez-les librement. Toutes les collections disponibles apparaîtront sur la page de recherche comme filtres à gauche, avec une exception :
+
+Les collections dont le nom commence par le mot `"hidden"` n'apparaîtront pas sur le frontend headless. Le thème Next.js Commerce est préconfiguré pour rechercher deux collections cachées. Les collections ont été choisies plutôt que des tags afin de pouvoir contrôler l'ordre des produits (les collections permettent un tri manuel).
+
+Créez les collections suivantes :
+
+- `Featured` — Les produits de cette collection sont affichés dans les trois blocs mis en avant sur la page d'accueil.
+- `All Products` — Les produits de cette collection sont affichés dans la section carrousel à défilement automatique sur la page d'accueil.
+
+### 📄 Pages
+
+[`https://yourinstance.saleor.cloud/dashboard/pages/`](https://yourinstance.saleor.cloud/dashboard/pages/)
+
+Next.js Commerce contient une route dynamique `[page]`. Elle utilisera la valeur pour rechercher une page correspondante dans Saleor. Si une page est trouvée, son contenu enrichi sera affiché avec la typographie Tailwind. Si aucune page n'est trouvée, une page 404 est affichée.
+
+### 🧭 Menus de navigation
+
+[`https://yourinstance.saleor.cloud/dashboard/navigation/`](https://yourinstance.saleor.cloud/dashboard/navigation/)
+
+La navigation en en-tête et en pied de page de Next.js Commerce est préconfigurée pour être contrôlée par les menus de navigation Saleor. Vous avez un contrôle total sur les liens : collections, pages, liens externes, et plus encore.
+
+Créez les menus de navigation suivants :
+
+- `navbar` — Éléments de menu affichés dans l'en-tête du frontend headless.
+- `footer` — Éléments de menu affichés dans le pied de page du frontend headless.
+
+### 🔎 SEO
+
+Les produits, collections, pages, etc. de Saleor vous permettent de créer des titres et descriptions SEO personnalisés. Next.js Commerce est préconfiguré pour afficher ces valeurs personnalisées, mais propose également des valeurs par défaut sensées si elles ne sont pas renseignées.
