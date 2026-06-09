@@ -4,7 +4,8 @@ import { addToCart, createCart, getCart, removeFromCart, updateCart } from 'lib/
 import { cookies } from 'next/headers';
 
 export const addItem = async (variantId: string | undefined): Promise<String | undefined> => {
-  let cartId = cookies().get('cartId')?.value;
+  const cookieStore = await cookies();
+  let cartId = cookieStore.get('cartId')?.value;
   let cart;
 
   if (cartId) {
@@ -14,7 +15,7 @@ export const addItem = async (variantId: string | undefined): Promise<String | u
   if (!cartId || !cart) {
     cart = await createCart();
     cartId = cart.id;
-    cookies().set('cartId', cartId);
+    cookieStore.set('cartId', cartId);
   }
 
   if (!variantId) {
@@ -29,7 +30,8 @@ export const addItem = async (variantId: string | undefined): Promise<String | u
 };
 
 export const removeItem = async (lineId: string): Promise<String | undefined> => {
-  const cartId = cookies().get('cartId')?.value;
+  const cookieStore = await cookies();
+  const cartId = cookieStore.get('cartId')?.value;
 
   if (!cartId) {
     return 'Missing cart ID';
@@ -50,7 +52,8 @@ export const updateItemQuantity = async ({
   variantId: string;
   quantity: number;
 }): Promise<String | undefined> => {
-  const cartId = cookies().get('cartId')?.value;
+  const cookieStore = await cookies();
+  const cartId = cookieStore.get('cartId')?.value;
 
   if (!cartId) {
     return 'Missing cart ID';

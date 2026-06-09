@@ -324,8 +324,8 @@ function flattenMenuItems(menuItems: null | undefined | MenuItemWithChildren[]):
         (item.collection
           ? `/search/${item.collection.slug}`
           : item.category
-          ? `/search/${item.category.slug}`
-          : '');
+            ? `/search/${item.category.slug}`
+            : '');
 
       return [
         ...(path
@@ -358,8 +358,8 @@ export async function getProducts({
       sortBy: query
         ? sortKey || ProductOrderField.Rank
         : sortKey === ProductOrderField.Rank
-        ? ProductOrderField.Rating
-        : sortKey || ProductOrderField.Rating,
+          ? ProductOrderField.Rating
+          : sortKey || ProductOrderField.Rating,
       sortDirection: reverse ? OrderDirection.Desc : OrderDirection.Asc,
     },
     tags: [TAGS.products],

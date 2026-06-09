@@ -1,9 +1,9 @@
 {
   "private": true,
-  "packageManager": "pnpm@8.2.0",
+  "packageManager": "pnpm@11.5.2",
   "engines": {
-    "node": ">=18",
-    "pnpm": ">=7"
+    "node": ">=20",
+    "pnpm": ">=11"
   },
   "scripts": {
     "dev": "next dev",
@@ -24,39 +24,39 @@
   },
   "dependencies": {
     "@graphql-typed-document-node/core": "3.2.0",
-    "@headlessui/react": "^1.7.15",
-    "@heroicons/react": "^2.0.18",
-    "@vercel/og": "^0.5.4",
-    "clsx": "^2.0.0",
-    "framer-motion": "^8.4.0",
+    "@headlessui/react": "^2.2.10",
+    "@heroicons/react": "^2.2.0",
+    "@vercel/og": "^0.11.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.40.0",
     "is-empty-iterable": "^3.0.0",
-    "jose": "4.14.4",
-    "next": "13.4.13-canary.15",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "jose": "^6.2.3",
+    "next": "15.3.9",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "3.3.1",
-    "@graphql-codegen/client-preset": "3.0.1",
-    "@next/env": "13.4.13",
+    "@graphql-codegen/cli": "^7.1.2",
+    "@graphql-codegen/client-preset": "^6.0.1",
+    "@next/env": "15.3.9",
     "@playwright/test": "^1.33.0",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/typography": "^0.5.9",
-    "@types/node": "20.4.4",
-    "@types/react": "18.2.16",
-    "@types/react-dom": "18.2.7",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "@vercel/git-hooks": "^1.0.0",
     "autoprefixer": "^10.4.14",
-    "dotenv": "16.0.3",
-    "eslint": "^8.45.0",
-    "eslint-config-next": "^13.4.12",
-    "eslint-config-prettier": "^8.8.0",
+    "dotenv": "^17.4.2",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "15.3.9",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-unicorn": "^48.0.0",
-    "lint-staged": "^13.2.3",
+    "lint-staged": "^17.0.7",
     "postcss": "^8.4.27",
-    "prettier": "3.0.1",
-    "prettier-plugin-tailwindcss": "^0.4.1",
-    "tailwindcss": "^3.3.3",
-    "typescript": "5.1.6"
+    "prettier": "^3.8.4",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "tailwindcss": "^3.4.19",
+    "typescript": "5.9.3"
   }
 }

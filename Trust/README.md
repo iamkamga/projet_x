@@ -51,7 +51,8 @@ Vous devrez utiliser les variables d'environnement [définies dans `.env.example
 pnpm install
 pnpm dev
 ```
-
+cd /home/kmg-ubuntu/projet_x/Trust
+env SALEOR_INSTANCE_URL=https://storefront1.saleor.cloud/graphql/ COMPANY_NAME="Saleor Commerce" TWITTER_CREATOR="@getsaleor" TWITTER_SITE="https://saleor.io/" SITE_NAME="Next.js Commerce by Saleor" pnpm dev
 Votre application devrait maintenant être accessible sur [localhost:3000](http://localhost:3000/).
 
 ---
